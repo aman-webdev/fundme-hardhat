@@ -18,13 +18,13 @@ developerChain.includes(network.name)
               const tx = await fundme.fund({ value: sendValue })
               tx.wait(3)
 
-              const tx2 = await fundme.withdraw()
-              tx2.wait(6)
+              const tx2 = await fundme.withdraw({ gasLimit: 80000 })
+              tx2.wait(1)
 
               const endingBalance = await fundme.provider.getBalance(
                   fundme.address
               )
-              console.log(endingBalance)
+              console.log(endingBalance.toString())
               assert.equal(endingBalance.toString(), "0")
           })
       })
